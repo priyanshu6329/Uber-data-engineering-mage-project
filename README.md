@@ -1,8 +1,6 @@
-# End-to-End Data Engineering Project: NYC Taxi Data Analytics
+# End-to-End Uber Data Engineering Project
 
-![Project Banner](https://i.imgur.com/7b2zV5V.png)
-
-This project is a complete, end-to-end data engineering pipeline built on the Google Cloud Platform (GCP). It processes raw NYC Yellow Taxi trip data from ingestion and transformation to storage in a data warehouse and final visualization on a business intelligence dashboard.
+This project is a complete, end-to-end data engineering pipeline built on the Google Cloud Platform (GCP). It processes raw NYC Yellow Taxi trip data from ingestion and transformation to storage in a data warehouse and final visualization on an interactive business intelligence dashboard.
 
 The entire workflow is orchestrated using the open-source data pipeline tool, **Mage AI**.
 
@@ -10,48 +8,66 @@ The entire workflow is orchestrated using the open-source data pipeline tool, **
 
 ## 🏛️ Cloud Architecture & Tech Stack
 
-The architecture for this project was designed to be scalable, cost-effective, and entirely cloud-based, using a modern data stack.
+The project follows a modern, scalable, and cloud-native architecture, leveraging the strengths of the Google Cloud ecosystem. The data flows from raw storage to final insights as shown below.
 
+![Architecture Diagram](https://github.com/priyanshu6329/Uber-data-engineering-mage-project/blob/main/architecture.jpg?raw=true)
+
+The technology stack includes:
 * **Cloud Provider**: Google Cloud Platform (GCP)
-* **Data Ingestion/Data Lake**: Google Cloud Storage (GCS)
+* **Data Ingestion/Data Lake**: Google Cloud Storage
 * **Orchestration & Transformation**: Mage AI running on a Google Compute Engine VM
 * **Programming Language**: Python (with Pandas)
 * **Data Warehouse**: Google BigQuery
-* **Business Intelligence**: Google Looker Studio
+* **Business Intelligence**: Looker (formerly Looker Studio)
 
-![Architecture Diagram](<![architecture](https://github.com/user-attachments/assets/d5a6187a-be50-4714-af56-49165ed7d6bf)
->)
+---
 
+## 📊 Data Modeling
+
+To optimize for analytical queries and performance, the data was modeled into a **Star Schema**. This schema consists of a central `fact_table` containing quantitative measures of each trip and foreign keys that link to multiple descriptive **dimension tables**.
+
+This dimensional model simplifies complex queries and allows for efficient filtering and aggregation of the data.
+
+![Data Model](https://github.com/priyanshu6329/Uber-data-engineering-mage-project/blob/main/data_model.jpeg?raw=true)
+
+---
 ---
 
 ## 📊 Dataset Overview
 
-This project utilizes the **Yellow Taxi Trip Records** dataset, which is publicly available from the [NYC Taxi and Limousine Commission (TLC)](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page). The data is in CSV format and contains detailed information for each trip, making it ideal for demonstrating ETL processes and business intelligence analysis.
+This project utilizes a public dataset of Uber taxi trips. The data is in CSV format and contains detailed information for each trip, making it ideal for demonstrating ETL processes and business intelligence analysis.
 
 Key fields in the raw dataset include:
 * **VendorID**: A code indicating the TPEP provider that provided the record.
-* **tpep_pickup_datetime**: The date and time when the meter was engaged.
-* **tpep_dropoff_datetime**: The date and time when the meter was disengaged.
-* **passenger_count**: The number of passengers in the vehicle.
-* **trip_distance**: The elapsed trip distance in miles.
+* **tpep\_pickup\_datetime**: The date and time when the meter was engaged.
+* **tpep\_dropoff\_datetime**: The date and time when the meter was disengaged.
+* **passenger\_count**: The number of passengers in the vehicle.
+* **trip\_distance**: The elapsed trip distance in miles.
 * **RatecodeID**: The final rate code in effect at the end of the trip. (e.g., Standard rate, JFK, Newark).
 * **PULocationID** & **DOLocationID**: The pickup and drop-off location IDs.
-* **payment_type**: A numeric code signifying how the passenger paid for the trip. (e.g., Credit card, Cash).
-* **fare_amount**: The time-and-distance fare calculated by the meter.
-* **tip_amount**: The tip amount. This field is automatically populated for credit card tips.
-* **total_amount**: The total amount charged to passengers.
+* **payment\_type**: A numeric code signifying how the passenger paid for the trip. (e.g., Credit card, Cash).
+* **fare\_amount**: The time-and-distance fare calculated by the meter.
+* **tip\_amount**: The tip amount. This field is automatically populated for credit card tips.
+* **total\_amount**: The total amount charged to passengers.
 
 ---
+## ✨ Final Looker Dashboard
 
-## ✨ Final Looker Studio Dashboard
+The project culminates in an interactive dashboard built in Looker that provides a multi-faceted view of the taxi trip data.
 
-The project culminates in an interactive dashboard that provides key insights into the NYC Taxi dataset.
+### Executive Summary
+The main dashboard offers a high-level summary for stakeholders, tracking key performance indicators such as **$1.6M in Total Revenue** from **100K records**. It also features interactive filters for drilling down into the data by Vendor ID, Payment Type, and Rate Code.
 
-#### **Geographic Analysis of Trip Pickups**
-<img src="YOUR_MAP_IMAGE_LINK_HERE" alt="Map View of NYC Taxi Trips" width="700"/>
+<p align="center">
+  <img src="https://github.com/priyanshu6329/Uber-data-engineering-mage-project/blob/main/Screenshots/Main%20Dashboard.png?raw=true" alt="Main Dashboard" width="800">
+</p>
 
-#### **Revenue and Payment Analysis**
-<img src="YOUR_BAR_CHART_IMAGE_LINK_HERE" alt="Bar chart of total amount by rate code" width="400"/> <img src="YOUR_PIE_CHART_IMAGE_LINK_HERE" alt="Pie chart of total amount by payment type" width="400"/>
+### Geographic Trip Analysis
+A detailed map view allows for geographic analysis of trip density across New York City. Trips are color-coded by their rate code, making it easy to identify patterns in specific areas like JFK, Newark, and Manhattan.
+
+<p align="center">
+  <img src="https://github.com/priyanshu6329/Uber-data-engineering-mage-project/blob/main/Screenshots/Map%20View.png?raw=true" alt="Map View" width="800">
+</p>
 
 ---
 
